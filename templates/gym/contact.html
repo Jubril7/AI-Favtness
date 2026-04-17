@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}Contact Us - Fitness First{% endblock %}
+
+{% block content %}
+<div style="background:#1d1d1d;padding:50px 0;text-align:center;color:white;">
+    <h1 style="font-weight:900;">Contact Us</h1>
+    <p style="color:#aaa;">We'd love to hear from you</p>
+</div>
+
+<div class="container" style="padding:60px 0;">
+    <div class="row g-5">
+        <div class="col-lg-5">
+            <h3 style="font-weight:800; margin-bottom:24px;">Get In Touch</h3>
+            <div class="d-flex mb-4">
+                <div style="width:48px;height:48px;background:#fde8ea;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="bi bi-geo-alt-fill" style="color:#e63946;font-size:1.2rem;"></i>
+                </div>
+                <div class="ms-3">
+                    <strong>Address</strong>
+                    <p class="text-muted mb-0">14 Ademola Adetokunbo Crescent, Wuse 2, Abuja</p>
+                </div>
+            </div>
+            <div class="d-flex mb-4">
+                <div style="width:48px;height:48px;background:#fde8ea;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="bi bi-telephone-fill" style="color:#e63946;font-size:1.2rem;"></i>
+                </div>
+                <div class="ms-3">
+                    <strong>Phone</strong>
+                    <p class="text-muted mb-0">+234 801 234 5678</p>
+                </div>
+            </div>
+            <div class="d-flex mb-4">
+                <div style="width:48px;height:48px;background:#fde8ea;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="bi bi-envelope-fill" style="color:#e63946;font-size:1.2rem;"></i>
+                </div>
+                <div class="ms-3">
+                    <strong>Email</strong>
+                    <p class="text-muted mb-0">hello@fitnessfirstng.com</p>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div style="width:48px;height:48px;background:#fde8ea;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="bi bi-clock-fill" style="color:#e63946;font-size:1.2rem;"></i>
+                </div>
+                <div class="ms-3">
+                    <strong>Hours</strong>
+                    <p class="text-muted mb-0">Mon–Fri: 6am – 10pm<br>Sat–Sun: 7am – 8pm</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7">
+            <div class="table-card">
+                <h4 style="font-weight:800; margin-bottom:24px;">Send Us a Message</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">Full Name *</label>
+                            <input type="text" name="name" class="form-control" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Email *</label>
+                            <input type="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Phone</label>
+                            <input type="text" name="phone" class="form-control">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Message *</label>
+                            <textarea name="message" class="form-control" rows="5" required></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-lg w-100">
+                                <i class="bi bi-send me-2"></i>Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

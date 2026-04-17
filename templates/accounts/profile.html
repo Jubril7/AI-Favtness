@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}My Profile - Fitness First{% endblock %}
+
+{% block content %}
+<div style="background:#1d1d1d;padding:40px 0;color:white;">
+    <div class="container">
+        <h2 style="font-weight:900;">My Profile</h2>
+    </div>
+</div>
+
+<div class="container" style="padding:40px 0; max-width:700px;">
+    <div class="row g-4">
+        <div class="col-12">
+            <div class="table-card">
+                <h4 style="font-weight:800; margin-bottom:24px;">Update Profile</h4>
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text" name="first_name" class="form-control" value="{{ form.first_name.value|default:'' }}">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text" name="last_name" class="form-control" value="{{ form.last_name.value|default:'' }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Email</label>
+                            <input type="email" name="email" class="form-control" value="{{ form.email.value|default:'' }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Phone</label>
+                            <input type="text" name="phone" class="form-control" value="{{ form.phone.value|default:'' }}">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Address</label>
+                            <textarea name="address" class="form-control" rows="3">{{ form.address.value|default:'' }}</textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" name="date_of_birth" class="form-control" value="{{ form.date_of_birth.value|default:'' }}">
+                        </div>
+                        <div class="col-12 d-flex gap-3">
+                            <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+                            <a href="{% url 'change_password' %}" class="btn btn-outline-secondary px-4">Change Password</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

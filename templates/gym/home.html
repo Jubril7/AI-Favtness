@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% block title %}Fitness First GYM - Home{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <h1>Nigeria's Premier<br>Fitness Destination — <span style="color:#d4506a;">Fitness First</span></h1>
+        <p>Join Abuja's leading gym. Expert Nigerian trainers, world-class equipment, flexible packages tailored for you.</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'packages' %}" class="btn-hero">Browse Packages</a>
+        {% else %}
+            <a href="{% url 'register' %}" class="btn-hero me-3">Join Now</a>
+            <a href="{% url 'packages' %}" class="btn btn-outline-light btn-lg" style="border-radius:30px;">View Packages</a>
+        {% endif %}
+    </div>
+</section>
+
+<!-- Stats Bar -->
+<section style="background:white; padding:30px 0; box-shadow:0 2px 10px rgba(0,0,0,0.05);">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-6 col-md-3 mb-3 mb-md-0">
+                <div style="font-size:2rem;font-weight:900;color:#e63946;">500+</div>
+                <div style="color:#666;font-weight:600;">Members</div>
+            </div>
+            <div class="col-6 col-md-3 mb-3 mb-md-0">
+                <div style="font-size:2rem;font-weight:900;color:#e63946;">20+</div>
+                <div style="color:#666;font-weight:600;">Expert Trainers</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div style="font-size:2rem;font-weight:900;color:#e63946;">50+</div>
+                <div style="color:#666;font-weight:600;">Equipment</div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div style="font-size:2rem;font-weight:900;color:#e63946;">10+</div>
+                <div style="color:#666;font-weight:600;">Years Experience</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Packages -->
+{% if packages %}
+<section style="padding:70px 0;">
+    <div class="container">
+        <h2 class="section-title">Our Packages</h2>
+        <div class="row g-4">
+            {% for package in packages %}
+            <div class="col-md-6 col-lg-4">
+                <div class="package-card">
+                    <span class="badge-category">{{ package.category.name }}</span>
+                    <h4 class="mt-3 mb-1">{{ package.name }}</h4>
+                    <p class="text-muted small mb-3">{{ package.package_type.name }} &bull; {{ package.duration_months }} month{{ package.duration_months|pluralize }}</p>
+                    <p class="text-muted">{{ package.description|truncatewords:15 }}</p>
+                    <div class="price mt-3">${{ package.price }}</div>
+                    <a href="{% url 'package_detail' package.pk %}" class="btn btn-primary w-100 mt-3">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'packages' %}" class="btn btn-outline-primary btn-lg">View All Packages</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Trainers -->
+{% if trainers %}
+<section style="background:white; padding:70px 0;">
+    <div class="container">
+        <h2 class="section-title">Our Trainers</h2>
+        <div class="row g-4">
+            {% for trainer in trainers %}
+            <div class="col-6 col-md-3">
+                <div class="trainer-card">
+                    <div class="trainer-avatar">{{ trainer.name|first }}</div>
+                    <h5 class="mb-1">{{ trainer.name }}</h5>
+                    <p class="text-muted small mb-1">{{ trainer.specialization }}</p>
+                    <p class="text-muted small"><i class="bi bi-award"></i> {{ trainer.experience_years }} yrs exp</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{% url 'trainers' %}" class="btn btn-outline-primary">Meet All Trainers</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#1d1d1d,#e63946);padding:80px 0;text-align:center;color:white;">
+    <div class="container">
+        <h2 style="font-size:2.2rem;font-weight:900;margin-bottom:16px;">Ready to Start Your Fitness Journey?</h2>
+        <p style="font-size:1.1rem;color:#ddd;margin-bottom:30px;">Join hundreds of members already transforming their lives at Fitness First.</p>
+        {% if not user.is_authenticated %}
+        <a href="{% url 'register' %}" class="btn-hero">Register Now — It's Free</a>
+        {% else %}
+        <a href="{% url 'packages' %}" class="btn-hero">Book a Package</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
