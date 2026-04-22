@@ -47,12 +47,8 @@
     <div class="container">
         <h2 class="section-title">Our Packages</h2>
 
-        {% comment %}Package images mapped by index{% endcomment %}
-        {% with package_imgs="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80,https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80,https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80,https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80,https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" %}
-        {% with imgs=package_imgs|split:"," %}
         <div class="row g-4">
             {% for package in packages %}
-            {% with idx=forloop.counter0 %}
             <div class="col-md-6 col-lg-4">
                 <div class="package-card" style="padding:0;overflow:hidden;">
                     <div style="height:180px;overflow:hidden;border-radius:18px 18px 0 0;">
@@ -72,10 +68,8 @@
                     </div>
                 </div>
             </div>
-            {% endwith %}
             {% endfor %}
         </div>
-        {% endwith %}{% endwith %}
 
         <div class="text-center mt-4">
             <a href="{% url 'packages' %}" class="btn btn-outline-primary btn-lg">View All Packages</a>
