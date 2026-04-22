@@ -16,7 +16,7 @@
         </div>
         <div class="col-lg-5">
             <div class="package-card text-center">
-                <div class="price mb-2">${{ package.price }}</div>
+                <div class="price mb-2">₦{{ package.price|floatformat:0 }}</div>
                 <p class="text-muted">for {{ package.duration_months }} month{{ package.duration_months|pluralize }}</p>
                 <hr>
                 <ul class="list-unstyled text-start mb-4">

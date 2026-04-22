@@ -27,12 +27,12 @@ for t in types:
 packages = [
     ('Starter Fitness', 'Weight Training', 'Basic', 1, 49.99),
     ('Monthly Cardio Blast', 'Cardio', 'Standard', 1, 69.99),
-    ('Yoga & Mindfulness', 'Yoga & Wellness', 'Standard', 1, 79.99),
-    ('Full Access Monthly', 'Group Classes', 'Premium', 1, 99.99),
-    ('Quarterly Power Pack', 'Weight Training', 'Premium', 3, 249.99),
-    ('6-Month Transformation', 'Group Classes', 'VIP', 6, 449.99),
-    ('Annual Wellness Pass', 'Yoga & Wellness', 'VIP', 12, 799.99),
-    ('Kickboxing Monthly', 'Martial Arts', 'Standard', 1, 89.99),
+    ('Yoga & Mindfulness', 'Yoga & Wellness', 'Standard', 1, 25000),
+    ('Full Access Monthly', 'Group Classes', 'Premium', 1, 35000),
+    ('Quarterly Power Pack', 'Weight Training', 'Premium', 3, 90000),
+    ('6-Month Transformation', 'Group Classes', 'VIP', 6, 165000),
+    ('Annual Wellness Pass', 'Yoga & Wellness', 'VIP', 12, 290000),
+    ('Kickboxing Monthly', 'Martial Arts', 'Standard', 1, 28000),
 ]
 for name, cat, ptype, duration, price in packages:
     Package.objects.get_or_create(

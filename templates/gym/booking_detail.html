@@ -31,15 +31,15 @@
             </div>
             <div class="col-sm-4 mb-3">
                 <div class="text-muted small">Total Amount</div>
-                <strong>${{ booking.total_amount }}</strong>
+                <strong>₦{{ booking.total_amount|floatformat:0 }}</strong>
             </div>
             <div class="col-sm-4 mb-3">
                 <div class="text-muted small">Amount Paid</div>
-                <strong class="text-success">${{ booking.amount_paid }}</strong>
+                <strong class="text-success">₦{{ booking.amount_paid|floatformat:0 }}</strong>
             </div>
             <div class="col-sm-4 mb-3">
                 <div class="text-muted small">Balance</div>
-                <strong class="text-danger">${{ booking.balance }}</strong>
+                <strong class="text-danger">₦{{ booking.balance|floatformat:0 }}</strong>
             </div>
             <div class="col-sm-6 mb-3">
                 <div class="text-muted small">Payment Status</div>

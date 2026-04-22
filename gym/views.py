@@ -90,3 +90,16 @@ def booking_detail(request, pk):
 def booking_history(request):
     bookings = Booking.objects.filter(user=request.user).select_related('package').order_by('-booked_at')
     return render(request, 'gym/booking_history.html', {'bookings': bookings})
+
+
+def about_view(request):
+    trainers = Trainer.objects.all()
+    return render(request, 'gym/about.html', {'trainers': trainers})
+
+
+def error_404(request, exception):
+    return render(request, '404.html', status=404)
+
+
+def error_500(request):
+    return render(request, '500.html', status=500)

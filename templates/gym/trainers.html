@@ -2,23 +2,33 @@
 {% block title %}Our Trainers - Fitness First{% endblock %}
 
 {% block content %}
-<div style="background:#1d1d1d;padding:50px 0;text-align:center;color:white;">
-    <h1 style="font-weight:900;">Meet Our Trainers</h1>
-    <p style="color:#aaa;">Certified professionals dedicated to your fitness journey</p>
+<div style="background:linear-gradient(135deg,rgba(255,240,243,0.95),rgba(252,228,236,0.92)), url('https://images.unsplash.com/photo-1571019614099-7d4d0d51b489?w=1400&q=80') center/cover no-repeat; padding:70px 0; text-align:center;">
+    <h1 style="font-family:'Playfair Display',serif;font-weight:900;color:#2d2d2d;">Meet Our Trainers</h1>
+    <p style="color:#888;font-size:1.1rem;">Certified professionals dedicated to your fitness journey</p>
 </div>
 
 <div class="container" style="padding:60px 0;">
     <div class="row g-4">
         {% for trainer in trainers %}
         <div class="col-md-6 col-lg-4">
-            <div class="trainer-card">
-                <div class="trainer-avatar">{{ trainer.name|first }}</div>
-                <h4 class="mb-1">{{ trainer.name }}</h4>
-                <p class="text-muted mb-1"><i class="bi bi-award-fill text-warning me-1"></i>{{ trainer.specialization }}</p>
-                <p class="text-muted small mb-3"><i class="bi bi-clock me-1"></i>{{ trainer.experience_years }} years experience</p>
-                {% if trainer.bio %}
-                <p class="text-muted small">{{ trainer.bio }}</p>
-                {% endif %}
+            <div class="trainer-card" style="padding:0;overflow:hidden;text-align:left;">
+                <div style="height:260px;overflow:hidden;border-radius:18px 18px 0 0;position:relative;">
+                    <img src="https://images.unsplash.com/photo-{% if forloop.counter == 1 %}1571019614099-7d4d0d51b489{% elif forloop.counter == 2 %}1506126613408-eca07ce68773{% elif forloop.counter == 3 %}1554284126-aa88f22d8b74{% elif forloop.counter == 4 %}1548690312-1a4ef4a3ad29{% elif forloop.counter == 5 %}1611072337226-1b9b78b3f3bf{% elif forloop.counter == 6 %}1590487988917-01e36c9c0263{% elif forloop.counter == 7 %}1581009146145-b5ef050c2e1e{% else %}1552674605-db6ffd4facb5{% endif %}?w=500&q=80"
+                         alt="{{ trainer.name }}"
+                         style="width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 0.4s;"
+                         onmouseover="this.style.transform='scale(1.05)'"
+                         onmouseout="this.style.transform='scale(1)'">
+                    <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.55));padding:20px 16px 12px;">
+                        <span style="background:#d4506a;color:white;padding:3px 12px;border-radius:20px;font-size:0.75rem;font-weight:600;">{{ trainer.specialization }}</span>
+                    </div>
+                </div>
+                <div style="padding:20px;">
+                    <h5 style="font-weight:700;margin-bottom:4px;">{{ trainer.name }}</h5>
+                    <p class="text-muted small mb-2"><i class="bi bi-award-fill text-warning me-1"></i>{{ trainer.experience_years }} years experience</p>
+                    {% if trainer.bio %}
+                    <p class="text-muted small mb-0" style="line-height:1.6;">{{ trainer.bio }}</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
         {% empty %}

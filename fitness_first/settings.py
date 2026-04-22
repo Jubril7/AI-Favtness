@@ -77,3 +77,7 @@ LOGIN_REDIRECT_URL = '/member/dashboard/'
 LOGOUT_REDIRECT_URL = '/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email — prints reset links to terminal during development
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Fitness First <hello@fitnessfirstng.com>'

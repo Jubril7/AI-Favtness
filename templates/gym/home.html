@@ -2,8 +2,9 @@
 {% block title %}Fitness First GYM - Home{% endblock %}
 
 {% block content %}
+
 <!-- Hero -->
-<section class="hero">
+<section class="hero" style="background:linear-gradient(135deg, rgba(255,240,243,0.95) 0%, rgba(252,228,236,0.92) 50%, rgba(248,187,208,0.88) 100%), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1400&q=80') center/cover no-repeat;">
     <div class="container">
         <h1>Nigeria's Premier<br>Fitness Destination — <span style="color:#d4506a;">Fitness First</span></h1>
         <p>Join Abuja's leading gym. Expert Nigerian trainers, world-class equipment, flexible packages tailored for you.</p>
@@ -11,7 +12,7 @@
             <a href="{% url 'packages' %}" class="btn-hero">Browse Packages</a>
         {% else %}
             <a href="{% url 'register' %}" class="btn-hero me-3">Join Now</a>
-            <a href="{% url 'packages' %}" class="btn btn-outline-light btn-lg" style="border-radius:30px;">View Packages</a>
+            <a href="{% url 'packages' %}" class="btn btn-outline-danger btn-lg" style="border-radius:30px;">View Packages</a>
         {% endif %}
     </div>
 </section>
@@ -21,19 +22,19 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <div style="font-size:2rem;font-weight:900;color:#e63946;">500+</div>
+                <div style="font-size:2rem;font-weight:900;color:#d4506a;">500+</div>
                 <div style="color:#666;font-weight:600;">Members</div>
             </div>
             <div class="col-6 col-md-3 mb-3 mb-md-0">
-                <div style="font-size:2rem;font-weight:900;color:#e63946;">20+</div>
+                <div style="font-size:2rem;font-weight:900;color:#d4506a;">20+</div>
                 <div style="color:#666;font-weight:600;">Expert Trainers</div>
             </div>
             <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:900;color:#e63946;">50+</div>
+                <div style="font-size:2rem;font-weight:900;color:#d4506a;">50+</div>
                 <div style="color:#666;font-weight:600;">Equipment</div>
             </div>
             <div class="col-6 col-md-3">
-                <div style="font-size:2rem;font-weight:900;color:#e63946;">10+</div>
+                <div style="font-size:2rem;font-weight:900;color:#d4506a;">10+</div>
                 <div style="color:#666;font-weight:600;">Years Experience</div>
             </div>
         </div>
@@ -45,20 +46,37 @@
 <section style="padding:70px 0;">
     <div class="container">
         <h2 class="section-title">Our Packages</h2>
+
+        {% comment %}Package images mapped by index{% endcomment %}
+        {% with package_imgs="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&q=80,https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80,https://images.unsplash.com/photo-1518611012118-696072aa579a?w=600&q=80,https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=600&q=80,https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&q=80,https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&q=80" %}
+        {% with imgs=package_imgs|split:"," %}
         <div class="row g-4">
             {% for package in packages %}
+            {% with idx=forloop.counter0 %}
             <div class="col-md-6 col-lg-4">
-                <div class="package-card">
-                    <span class="badge-category">{{ package.category.name }}</span>
-                    <h4 class="mt-3 mb-1">{{ package.name }}</h4>
-                    <p class="text-muted small mb-3">{{ package.package_type.name }} &bull; {{ package.duration_months }} month{{ package.duration_months|pluralize }}</p>
-                    <p class="text-muted">{{ package.description|truncatewords:15 }}</p>
-                    <div class="price mt-3">${{ package.price }}</div>
-                    <a href="{% url 'package_detail' package.pk %}" class="btn btn-primary w-100 mt-3">View Details</a>
+                <div class="package-card" style="padding:0;overflow:hidden;">
+                    <div style="height:180px;overflow:hidden;border-radius:18px 18px 0 0;">
+                        <img src="https://images.unsplash.com/photo-{% if forloop.counter == 1 %}1581009146145-b5ef050c2e1e{% elif forloop.counter == 2 %}1571019613454-1cb2f99b2d8b{% elif forloop.counter == 3 %}1518611012118-696072aa579a{% elif forloop.counter == 4 %}1552674605-db6ffd4facb5{% elif forloop.counter == 5 %}1549060279-7e168fcee0c2{% else %}1544367567-0f2fcb009e0b{% endif %}?w=600&q=80"
+                             alt="{{ package.name }}"
+                             style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s;"
+                             onmouseover="this.style.transform='scale(1.05)'"
+                             onmouseout="this.style.transform='scale(1)'">
+                    </div>
+                    <div style="padding:22px;">
+                        <span class="badge-category">{{ package.category.name }}</span>
+                        <h4 class="mt-3 mb-1">{{ package.name }}</h4>
+                        <p class="text-muted small mb-3">{{ package.package_type.name }} &bull; {{ package.duration_months }} month{{ package.duration_months|pluralize }}</p>
+                        <p class="text-muted">{{ package.description|truncatewords:12 }}</p>
+                        <div class="price mt-2">₦{{ package.price|floatformat:0 }}</div>
+                        <a href="{% url 'package_detail' package.pk %}" class="btn btn-primary w-100 mt-3">View Details</a>
+                    </div>
                 </div>
             </div>
+            {% endwith %}
             {% endfor %}
         </div>
+        {% endwith %}{% endwith %}
+
         <div class="text-center mt-4">
             <a href="{% url 'packages' %}" class="btn btn-outline-primary btn-lg">View All Packages</a>
         </div>
@@ -74,11 +92,17 @@
         <div class="row g-4">
             {% for trainer in trainers %}
             <div class="col-6 col-md-3">
-                <div class="trainer-card">
-                    <div class="trainer-avatar">{{ trainer.name|first }}</div>
-                    <h5 class="mb-1">{{ trainer.name }}</h5>
-                    <p class="text-muted small mb-1">{{ trainer.specialization }}</p>
-                    <p class="text-muted small"><i class="bi bi-award"></i> {{ trainer.experience_years }} yrs exp</p>
+                <div class="trainer-card" style="padding:0;overflow:hidden;">
+                    <div style="height:160px;overflow:hidden;border-radius:18px 18px 0 0;">
+                        <img src="https://images.unsplash.com/photo-{% if forloop.counter == 1 %}1571019614099-7d4d0d51b489{% elif forloop.counter == 2 %}1506126613408-eca07ce68773{% elif forloop.counter == 3 %}1554284126-aa88f22d8b74{% elif forloop.counter == 4 %}1548690312-1a4ef4a3ad29{% else %}1611072337226-1b9b78b3f3bf{% endif %}?w=400&q=80"
+                             alt="{{ trainer.name }}"
+                             style="width:100%;height:100%;object-fit:cover;object-position:top;">
+                    </div>
+                    <div style="padding:16px;">
+                        <h6 class="mb-1" style="font-weight:700;">{{ trainer.name }}</h6>
+                        <p class="text-muted small mb-1">{{ trainer.specialization }}</p>
+                        <p class="text-muted small mb-0"><i class="bi bi-award"></i> {{ trainer.experience_years }} yrs exp</p>
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -90,11 +114,47 @@
 </section>
 {% endif %}
 
-<!-- CTA -->
-<section style="background:linear-gradient(135deg,#1d1d1d,#e63946);padding:80px 0;text-align:center;color:white;">
+<!-- Why Us -->
+<section style="padding:70px 0; background:#fdf6f8;">
     <div class="container">
-        <h2 style="font-size:2.2rem;font-weight:900;margin-bottom:16px;">Ready to Start Your Fitness Journey?</h2>
-        <p style="font-size:1.1rem;color:#ddd;margin-bottom:30px;">Join hundreds of members already transforming their lives at Fitness First.</p>
+        <h2 class="section-title">Why Choose Fitness First?</h2>
+        <div class="row g-4 mt-2">
+            <div class="col-md-4">
+                <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(212,80,106,0.1);">
+                    <img src="https://images.unsplash.com/photo-1534258936925-c58bed479fcb?w=600&q=80" alt="Modern Equipment" style="width:100%;height:200px;object-fit:cover;">
+                    <div style="background:white;padding:20px;">
+                        <h5 style="font-weight:700;">Modern Equipment</h5>
+                        <p class="text-muted small">State-of-the-art machines and free weights for every training style.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(212,80,106,0.1);">
+                    <img src="https://images.unsplash.com/photo-1607962837359-5e7e89f86776?w=600&q=80" alt="Expert Trainers" style="width:100%;height:200px;object-fit:cover;">
+                    <div style="background:white;padding:20px;">
+                        <h5 style="font-weight:700;">Expert Trainers</h5>
+                        <p class="text-muted small">Certified Nigerian fitness professionals passionate about your results.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(212,80,106,0.1);">
+                    <img src="https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=600&q=80" alt="Welcoming Community" style="width:100%;height:200px;object-fit:cover;">
+                    <div style="background:white;padding:20px;">
+                        <h5 style="font-weight:700;">Welcoming Community</h5>
+                        <p class="text-muted small">A supportive, inclusive environment where everyone belongs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#2d2d2d,#d4506a);padding:80px 0;text-align:center;color:white;">
+    <div class="container">
+        <h2 style="font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;margin-bottom:16px;">Ready to Start Your Fitness Journey?</h2>
+        <p style="font-size:1.1rem;color:#f9e4e8;margin-bottom:30px;">Join hundreds of members already transforming their lives at Fitness First, Abuja.</p>
         {% if not user.is_authenticated %}
         <a href="{% url 'register' %}" class="btn-hero">Register Now — It's Free</a>
         {% else %}
@@ -102,4 +162,5 @@
         {% endif %}
     </div>
 </section>
+
 {% endblock %}

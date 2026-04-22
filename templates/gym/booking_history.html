@@ -73,8 +73,8 @@
                         <td><strong>{{ booking.package.name }}</strong></td>
                         <td>{{ booking.start_date }}</td>
                         <td>{{ booking.end_date }}</td>
-                        <td>${{ booking.total_amount }}</td>
-                        <td>${{ booking.amount_paid }}</td>
+                        <td>₦{{ booking.total_amount|floatformat:0 }}</td>
+                        <td>₦{{ booking.amount_paid|floatformat:0 }}</td>
                         <td><span class="status-badge status-{{ booking.payment_status }}">{{ booking.get_payment_status_display }}</span></td>
                         <td><span class="status-badge status-{{ booking.booking_status }}">{{ booking.get_booking_status_display }}</span></td>
                         <td><a href="{% url 'booking_detail' booking.pk %}" class="btn btn-sm btn-outline-primary">View</a></td>
